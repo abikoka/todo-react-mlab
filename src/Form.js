@@ -4,11 +4,11 @@ import React, { Component } from 'react'
 class Form extends Component {
   render() {
     return (
-      <form class="todo-add-form">
-        <input name="title" type="text" placeholder="Todoタイトルの入力" defalutValue="nanyakanya" />
-        <input name="description" type="text" placeholder="備考の入力" defalutValue="hogehogefuge" />
-        <input type="button" value="追加" />
-      </form>
+      <div>
+        <input name="title" type="text" placeholder="Todoタイトルの入力" defalutvalue="nanyakanya" />
+        <input name="description" type="text" placeholder="備考の入力" defalutvalue="hogehogefuge" />
+        <input type="submit" value="追加" />
+      </div>
     )
   }
 }
