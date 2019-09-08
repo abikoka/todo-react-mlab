@@ -2,6 +2,8 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import Form from './Form';
+
 function App() {
   return (
     <div className="App">
@@ -9,7 +11,7 @@ function App() {
         <h2>Todo Sample by React with mLab.</h2>
       </header>
       <div class="todo-add">
-        <input type="button" value="追加" />
+        <Form></Form>
       </div>
       <div class="todo-list">
         <section id="t1">
