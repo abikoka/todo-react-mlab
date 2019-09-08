@@ -5,20 +5,36 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header>
+        <h2>Todo Sample by React with mLab.</h2>
       </header>
+      <div class="todo-add">
+        <input type="button" value="追加" />
+      </div>
+      <div class="todo-list">
+        <section id="t1">
+          <div class="delete">
+            <input type="button" value="削除" />
+          </div>
+          <div class="contents">
+            <h3>Todo Title 1</h3>
+            <p>
+              Todo Description 1
+            </p>
+          </div>
+        </section>
+        <section id="t2">
+          <div class="delete">
+            <input type="button" value="削除" />
+          </div>
+          <div class="contents">
+            <h3>Todo Title 2</h3>
+            <p>
+              Todo Description 2
+            </p>
+          </div>
+        </section>
+      </div>
     </div>
   );
 }

@@ -31,3 +31,24 @@
     transform: rotate(360deg);
   }
 }
+
+
+.todo-list {
+  width: 100%;
+  border: 1px solid #555;
+  margin: 5px;
+}
+
+section {
+  display: flex;
+  border-bottom: 1px solid #eee;
+}
+
+section .delete {
+  width: 10%;
+  padding-top: 25px;
+}
+section .contents {
+  width: 90%;
+  text-align: left;
+}
