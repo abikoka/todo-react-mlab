@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 
 import Form from './Form';
+import TodoList from './TodoList';
 
 class App extends Component {
   constructor() {
@@ -49,28 +50,8 @@ class App extends Component {
           </form>
         </div>
         <div class="todo-list">
-          <section id="t1">
-            <div class="delete">
-              <input type="button" value="削除" />
-            </div>
-            <div class="contents">
-              <h3>Todo Title 1</h3>
-              <p>
-                Todo Description 1
-              </p>
-            </div>
-          </section>
-          <section id="t2">
-            <div class="delete">
-              <input type="button" value="削除" />
-            </div>
-            <div class="contents">
-              <h3>Todo Title 2</h3>
-              <p>
-                Todo Description 2
-              </p>
-            </div>
-          </section>
+          <TodoList todos={this.state.todos}>
+          </TodoList>
         </div>
       </div>
     );
