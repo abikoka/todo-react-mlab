@@ -7,6 +7,8 @@ import Form from './Form';
 class App extends Component {
   constructor() {
     super()
+    const apikey = '97fc76b5-a0af-467c-823f-ab2894d6d1ba';
+    const mlab_baseurl = ' https://api.mlab.com/api/1';
     const todos = [];
     this.state = {
       todos: todos,
@@ -21,6 +23,21 @@ class App extends Component {
     const description = e.target.description.value;
     const todos = this.state.todos.slice();
     const countTodo = this.state.countTodo;
+
+ 
+    const MongoClient = require('mongodb').MongoClient;
+
+    const uri = "mongodb+srv://iisen:ivgq25hfhN@mythos-iisen-jawpq.mongodb.net/test?retryWrites=true&w=majority";
+    const client = new MongoClient(uri, { useNewUrlParser: true });
+    client.connect(err => {
+      const collection = client.db("test").collection("devices");
+
+      collection.insert({title: title, desc: description, done: false})
+      // perform actions on the collection object
+
+      client.close();
+    });
+
     todos.push({
       id: countTodo,
       title: title,
