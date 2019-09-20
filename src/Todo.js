@@ -1,25 +1,44 @@
-import React, {Component} from 'react';
-import './Todo.css';
+import { Component } from 'react';
+
+import axios from 'axios';
+import config from './config/config';
 
 class Todo extends Component {
-  render() {
-    const className = 'undone';
-    const link = this.props.done ? '元に戻す' : '完了';
 
-    return(
-      <section class="row" id="t{this.props.id}">
-        <div class="delete">
-          <input type="button" value="削除" />
-          <br />
-          <p class="[className}">{link}</p>
-        </div>
-        <div class="contents">
-          <h3>{this.props.title}</h3>
-          <p>{this.props.desc}</p>
-        </div>
-      </section>
-    );
+  get(apiEndpoint) {
+    return axios.get(config.baseUrl+apiEndpoint+'?'+config.apiKeyParam)
+      .then((response)=> {
+        return response;
+      }).catch((err) => {
+        console.log(err);
+      })
+    ;
   }
+
+  /**
+   * ex. apiEndpoint: /databases/{database}/collections/{collection}
+   */
+  post(apiEndpoint, payload) {
+    return axios.post(config.baseUrl+apiEndpoint+'?'+config.apiKeyParam,payload)
+      .then((response) => {
+          return response;
+      }).catch((err) => {
+        console.log(err);
+      })
+    ;
+  }
+
+  deleteDetail(apiEndpoint) {
+    return axios.delete(config.baseURl+apiEndpoint+'?'+config.apiKeyParam)
+      .then((response) => {
+        return response;
+      })
+      .catch((err)=> {
+        console.log(err);
+      })
+    ;
+  }
+
 }
 
 export default Todo;

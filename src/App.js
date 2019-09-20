@@ -5,10 +5,12 @@ import './App.css';
 import Form from './Form';
 import TodoList from './TodoList';
 
+import Todo from './Todo';
+
 class App extends Component {
   constructor() {
     super()
-    const todos = [];
+    const todos = []
     this.state = {
       todos: todos,
       countTodo: todos.length + 1,
@@ -20,14 +22,18 @@ class App extends Component {
     e.preventDefault();
     const title = e.target.title.value;
     const description = e.target.description.value;
-    const todos = this.state.todos.slice();
+    const todos = []
     const countTodo = this.state.countTodo;
-    todos.push({
+
+    let todo = {
       id: countTodo,
       title: title,
       desc: description,
       done: false,
-    })
+    };
+    let app = new Todo
+    app.post('/databases/test2019-09-19/collections/todos', todo);
+    todos.push(todo)
 
     this.setState({todos})
     this.setState({ countTodo: countTodo + 1 })
@@ -40,7 +46,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div class="App">
         <header>
           <h2>Todo Sample by React with mLab.</h2>
         </header>
