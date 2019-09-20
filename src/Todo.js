@@ -1,7 +1,8 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 
 import axios from 'axios';
 import config from './config/config';
+import './Todo.css';
 
 class Todo extends Component {
 
@@ -39,6 +40,26 @@ class Todo extends Component {
     ;
   }
 
+  render() {
+    const className = 'contents undone';
+    const link = this.props.done ? '差し戻し' : '完了へ';
+    const dataId = "t" + this.props.id;
+
+    return (
+          <section id={dataId}>
+            <div class="delete">
+              <input type="button" value="削除" />
+            </div>
+            <div class={className}>
+              <input type="button" value={link} />
+              <h3>{this.props.title}</h3>
+              <p>
+               {this.props.desc}
+              </p>
+            </div>
+          </section>
+    );
+  }
 }
 
 export default Todo;

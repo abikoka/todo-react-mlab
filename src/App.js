@@ -15,14 +15,13 @@ class App extends Component {
       todos: todos,
       countTodo: todos.length + 1,
     }
-
   }
 
   handleSubmit(e) {
     e.preventDefault();
     const title = e.target.title.value;
     const description = e.target.description.value;
-    const todos = []
+    const todos = this.state.todos;
     const countTodo = this.state.countTodo;
 
     let todo = {
@@ -40,8 +39,24 @@ class App extends Component {
 
     e.target.title.value = '';
     e.target.description.value = '';
+  }
 
-    console.log(todos)
+  componentDidMount() {
+    const app = new Todo;
+    app
+      .get('/databases/test2019-09-19/collections/todos')
+      .then((response) => {
+        let countTodo = this.state.countTodo;
+        const todos = response.data.map(data => {
+            const todo = Object.assign({}, data, {id: data._id['$oid'], done: false});
+            countTodo++
+            return todo;
+        });
+
+        this.setState({todos, countTodo})
+      })
+    ;
+
   }
 
   render() {
