@@ -4,12 +4,12 @@ import './App.css';
 
 import Form from './Form';
 
+import Todo from './Todo';
+
 class App extends Component {
   constructor() {
     super()
-    const apikey = '97fc76b5-a0af-467c-823f-ab2894d6d1ba';
-    const mlab_baseurl = ' https://api.mlab.com/api/1';
-    const todos = [];
+    const todos = []
     this.state = {
       todos: todos,
       countTodo: todos.length + 1,
@@ -21,29 +21,18 @@ class App extends Component {
     e.preventDefault();
     const title = e.target.title.value;
     const description = e.target.description.value;
-    const todos = this.state.todos.slice();
+    const todos = []
     const countTodo = this.state.countTodo;
 
- 
-    const MongoClient = require('mongodb').MongoClient;
-
-    const uri = "mongodb+srv://iisen:ivgq25hfhN@mythos-iisen-jawpq.mongodb.net/test?retryWrites=true&w=majority";
-    const client = new MongoClient(uri, { useNewUrlParser: true });
-    client.connect(err => {
-      const collection = client.db("test").collection("devices");
-
-      collection.insert({title: title, desc: description, done: false})
-      // perform actions on the collection object
-
-      client.close();
-    });
-
-    todos.push({
+    let todo = {
       id: countTodo,
       title: title,
       desc: description,
       done: false,
-    })
+    };
+    let app = new Todo
+    app.post('/databases/test2019-09-19/collections/todos', todo);
+    todos.push(todo)
 
     this.setState({todos})
     this.setState({ countTodo: countTodo + 1 })
@@ -56,7 +45,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div class="App">
         <header>
           <h2>Todo Sample by React with mLab.</h2>
         </header>
