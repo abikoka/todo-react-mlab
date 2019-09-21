@@ -66,7 +66,9 @@ class Todo extends Component {
     return (
           <section class={rowClass} id={dataId}>
             <div class="delete">
-              <input type="button" value="削除" />
+              <input type="button" value="削除"
+                onClick={(e) => { e.preventDefault(); this.props.removeTodo(this.props)}}
+                />
             </div>
             <div class={className}>
               <input type="button"
