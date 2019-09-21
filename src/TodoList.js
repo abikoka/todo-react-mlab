@@ -12,6 +12,7 @@ class TodoList extends Component {
         id={todo.id}
         title={todo.title}
         desc={todo.desc}
+        done={todo.done}
         >
       </Todo>
     )

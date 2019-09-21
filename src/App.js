@@ -48,7 +48,7 @@ class App extends Component {
       .then((response) => {
         let countTodo = this.state.countTodo;
         const todos = response.data.map(data => {
-            const todo = Object.assign({}, data, {id: data._id['$oid'], done: false});
+            const todo = Object.assign({}, data, {id: data._id['$oid']});
             countTodo++
             return todo;
         });
