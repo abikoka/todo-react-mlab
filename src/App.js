@@ -41,6 +41,24 @@ class App extends Component {
     e.target.description.value = '';
   }
 
+  setTodoStatus(clickTodo) {
+    const newTodo = this.state.todos.filter(todo => todo.id === clickTodo.id).shift();
+    newTodo.done = !newTodo.done;
+    let payload = {
+      id: undefined,
+      title: newTodo.title,
+      desc: newTodo.desc,
+      done: newTodo.done,
+    };
+
+    const app = new Todo;
+    app.put('/databases/test2019-09-19/collections/todos', clickTodo.id, payload);
+    
+    const todos = this.state.todos.map(todo => Object.assign({}, todo.id === clickTodo.id? newTodo : todo));
+
+    this.setState({ todos });
+  }
+
   componentDidMount() {
     const app = new Todo;
     app
@@ -48,7 +66,7 @@ class App extends Component {
       .then((response) => {
         let countTodo = this.state.countTodo;
         const todos = response.data.map(data => {
-            const todo = Object.assign({}, data, {id: data._id['$oid'], done: false});
+            const todo = Object.assign({}, data, {id: data._id['$oid']});
             countTodo++
             return todo;
         });
@@ -71,7 +89,10 @@ class App extends Component {
           </form>
         </div>
         <div class="todo-list">
-          <TodoList todos={this.state.todos}>
+          <TodoList
+            todos={this.state.todos}
+            setTodoStatus={this.setTodoStatus.bind(this)}
+            >
           </TodoList>
         </div>
       </div>
