@@ -7,7 +7,8 @@ import './Todo.css';
 class Todo extends Component {
 
   get(apiEndpoint) {
-    return axios.get(config.baseUrl+apiEndpoint+'?'+config.apiKeyParam)
+    const qParam = "q=" + encodeURIComponent('{"deleted_at": ""}');
+    return axios.get(config.baseUrl+apiEndpoint+'?'+qParam+'&'+config.apiKeyParam)
       .then((response)=> {
         return response;
       }).catch((err) => {
@@ -41,15 +42,20 @@ class Todo extends Component {
     ;
   }
 
-  deleteDetail(apiEndpoint, id) {
-    const idParam = this.makeIdParam(id);
-    return axios.delete(config.baseUrl+apiEndpoint+'?'+idParam+'&'+config.apiKeyParam)
-      .then((response) => {
-        return response;
-      })
-      .catch((err)=> {
-        console.log(err);
-      })
+  deleteDetail(apiEndpoint, id, payload) {
+    console.log(payload);
+    payload.deleted_at = (new Date).toDateString()
+    this.put(apiEndpoint, id, payload)
+// following comment out because MongoDB mlab.com do not allow the DELETE method.
+//    const idParam = this.makeIdParam(id);
+//    const options = {}
+//    return axios.delete(config.baseUrl+apiEndpoint+'?'+idParam+'&'+config.apiKeyParam, options)
+//      .then((response) => {
+//        return response;
+//      })
+//      .catch((err)=> {
+//        console.log(err);
+//      })
     ;
   }
 

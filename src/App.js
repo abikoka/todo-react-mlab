@@ -13,7 +13,7 @@ class App extends Component {
     const todos = []
     this.state = {
       todos: todos,
-      countTodo: todos.length + 1,
+      countTodo: todos.length,
     }
   }
 
@@ -29,6 +29,7 @@ class App extends Component {
       title: title,
       desc: description,
       done: false,
+      deleted_at: '',
     };
     let app = new Todo
     app.post('/databases/test2019-09-19/collections/todos', todo);
@@ -49,6 +50,7 @@ class App extends Component {
       title: newTodo.title,
       desc: newTodo.desc,
       done: newTodo.done,
+      deleted_at: newTodo.deleted_at,
     };
 
     const app = new Todo;
@@ -61,10 +63,15 @@ class App extends Component {
 
   removeTodo(clickTodo) {
     // 削除時のアニメーションがほしい。
+    const targetTodo = this.state.todos.filter(todo => todo.id === clickTodo.id).shift();
 
     const todos = this.state.todos.filter(todo => !(todo.id === clickTodo.id)).slice(); // 無理くりワンライン
 
+    const app = new Todo;
+    app.deleteDetail('/databases/test2019-09-19/collections/todos', clickTodo.id, targetTodo);
+    
     this.setState({ todos });
+    this.setState({ countTodo: this.state.countTodo - 1 })
   }
 
   componentDidMount() {
@@ -97,6 +104,7 @@ class App extends Component {
           </form>
         </div>
         <div class="todo-list">
+          <p>全<span>{this.state.countTodo}</span>個</p>
           <TodoList
             todos={this.state.todos}
             setTodoStatus={this.setTodoStatus.bind(this)}
