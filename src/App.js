@@ -59,6 +59,14 @@ class App extends Component {
     this.setState({ todos });
   }
 
+  removeTodo(clickTodo) {
+    // 削除時のアニメーションがほしい。
+
+    const todos = this.state.todos.filter(todo => !(todo.id === clickTodo.id)).slice(); // 無理くりワンライン
+
+    this.setState({ todos });
+  }
+
   componentDidMount() {
     const app = new Todo;
     app
@@ -92,6 +100,7 @@ class App extends Component {
           <TodoList
             todos={this.state.todos}
             setTodoStatus={this.setTodoStatus.bind(this)}
+            removeTodo={this.removeTodo.bind(this)}
             >
           </TodoList>
         </div>

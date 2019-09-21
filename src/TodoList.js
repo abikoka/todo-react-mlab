@@ -14,6 +14,7 @@ class TodoList extends Component {
         desc={todo.desc}
         done={todo.done}
         setTodoStatus={this.props.setTodoStatus}
+        removeTodo={this.props.removeTodo}
         >
       </Todo>
     )
